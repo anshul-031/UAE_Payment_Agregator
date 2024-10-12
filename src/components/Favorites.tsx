@@ -8,6 +8,7 @@ const Favorites: React.FC = () => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const addFavorite = (service: string) => {
     if (!favorites.includes(service)) {
       setFavorites([...favorites, service]);
