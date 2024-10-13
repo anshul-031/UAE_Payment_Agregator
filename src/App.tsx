@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './components/Layout';
 import Home from './components/Home';
@@ -18,24 +18,50 @@ import PageNotFound from './components/PageNotFound';
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      const now = new Date();
+      if (now < new Date(parsedUser.expiry)) {
+        setIsAuthenticated(true);
+      } else {
+        localStorage.removeItem('user');
+      }
+    }
+  }, []);
+
   const handleLogin = (username: string, password: string) => {
     if (username === 'demo' && password === 'password') {
+      const now = new Date();
+      const expiry = new Date();
+      expiry.setMinutes(now.getMinutes() + 30);
+      localStorage.setItem('user', JSON.stringify({ username, expiry }));
       setIsAuthenticated(true);
-      const timeoutId = setTimeout(() => {
-        setIsAuthenticated(false);
-        console.log('Session timed out');
-      }, 1800000); // 30 minutes
-      console.log('Timeout set:', timeoutId);
+      console.log('User logged in:', username);
     } else {
       alert('Invalid credentials');
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    setIsAuthenticated(false);
+    console.log('User logged out');
+  };
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route element={<Layout />}>
+        <Route path="/" element={isAuthenticated ? (
+          <div>
+            <Home />
+            <button onClick={handleLogout} className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded fixed top-0 right-0 m-4"> {/* Added fixed positioning */}
+              Sign Out
+            </button>
+          </div>
+        ) : <Navigate to="/authentication" replace />} />
+        <Route element={<Layout isAuthenticated={isAuthenticated} handleLogout={handleLogout} />}>
           <Route path="/contact-us" element={isAuthenticated ? <ContactUs /> : <Navigate to="/authentication" replace />} />
           <Route path="/edit-profile" element={isAuthenticated ? <EditProfile /> : <Navigate to="/authentication" replace />} />
           <Route path="/banking/check-balance" element={isAuthenticated ? <CheckBalance /> : <Navigate to="/authentication" replace />} />
@@ -46,7 +72,7 @@ function App() {
           <Route path="/bill-payments/recharge-mobile" element={isAuthenticated ? <RechargeMobile /> : <Navigate to="/authentication" replace />} />
           <Route path="*" element={isAuthenticated ? <PageNotFound /> : <Navigate to="/authentication" replace />} />
         </Route>
-        <Route path="/authentication" element={<Authentication onLogin={handleLogin} />} />
+        <Route path="/authentication" element={isAuthenticated ? <Navigate to="/" replace /> : <Authentication onLogin={handleLogin} />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
