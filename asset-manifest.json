@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/UAE_Payment_Agregator/static/css/main.291794ac.css",
-    "main.js": "/UAE_Payment_Agregator/static/js/main.21d2384f.js",
+    "main.js": "/UAE_Payment_Agregator/static/js/main.39bd040c.js",
     "static/js/453.4b816d71.chunk.js": "/UAE_Payment_Agregator/static/js/453.4b816d71.chunk.js",
     "index.html": "/UAE_Payment_Agregator/index.html",
     "static/media/BookFlights.svg": "/UAE_Payment_Agregator/static/media/BookFlights.ec39b7d1e48b16c1ce0c639a9f8d7266.svg",
@@ -11,11 +11,11 @@
     "static/media/CheckBalance.svg": "/UAE_Payment_Agregator/static/media/CheckBalance.fd5d5243dd9bd56f02060a20cda4596b.svg",
     "static/media/MoneyTransfer.svg": "/UAE_Payment_Agregator/static/media/MoneyTransfer.83402f40fc47a16048007ffd384c602f.svg",
     "main.291794ac.css.map": "/UAE_Payment_Agregator/static/css/main.291794ac.css.map",
-    "main.21d2384f.js.map": "/UAE_Payment_Agregator/static/js/main.21d2384f.js.map",
+    "main.39bd040c.js.map": "/UAE_Payment_Agregator/static/js/main.39bd040c.js.map",
     "453.4b816d71.chunk.js.map": "/UAE_Payment_Agregator/static/js/453.4b816d71.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.291794ac.css",
-    "static/js/main.21d2384f.js"
+    "static/js/main.39bd040c.js"
   ]
 }
