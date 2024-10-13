@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { MemoryRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Layout from './components/Layout';
 import Home from './components/Home';
 import ContactUs from './components/ContactUs';
 import EditProfile from './components/EditProfile';
@@ -33,19 +34,21 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={isAuthenticated ? <Home /> : <Navigate to="/authentication" replace />} />
-        <Route path="/contact-us" element={isAuthenticated ? <ContactUs /> : <Navigate to="/authentication" replace />} />
-        <Route path="/edit-profile" element={isAuthenticated ? <EditProfile /> : <Navigate to="/authentication" replace />} />
+        <Route path="/" element={<Home />} />
+        <Route element={<Layout />}>
+          <Route path="/contact-us" element={isAuthenticated ? <ContactUs /> : <Navigate to="/authentication" replace />} />
+          <Route path="/edit-profile" element={isAuthenticated ? <EditProfile /> : <Navigate to="/authentication" replace />} />
+          <Route path="/banking/check-balance" element={isAuthenticated ? <CheckBalance /> : <Navigate to="/authentication" replace />} />
+          <Route path="/banking/open-account" element={isAuthenticated ? <OpenAccount /> : <Navigate to="/authentication" replace />} />
+          <Route path="/banking/money-transfer" element={isAuthenticated ? <MoneyTransfer /> : <Navigate to="/authentication" replace />} />
+          <Route path="/bill-payments/book-flights" element={isAuthenticated ? <BookFlights /> : <Navigate to="/authentication" replace />} />
+          <Route path="/bill-payments/pay-electricity" element={isAuthenticated ? <PayElectricity /> : <Navigate to="/authentication" replace />} />
+          <Route path="/bill-payments/recharge-mobile" element={isAuthenticated ? <RechargeMobile /> : <Navigate to="/authentication" replace />} />
+          <Route path="*" element={isAuthenticated ? <PageNotFound /> : <Navigate to="/authentication" replace />} />
+        </Route>
         <Route path="/authentication" element={<Authentication onLogin={handleLogin} />} />
-        <Route path="/banking/check-balance" element={isAuthenticated ? <CheckBalance /> : <Navigate to="/authentication" replace />} />
-        <Route path="/banking/open-account" element={isAuthenticated ? <OpenAccount /> : <Navigate to="/authentication" replace />} />
-        <Route path="/banking/money-transfer" element={isAuthenticated ? <MoneyTransfer /> : <Navigate to="/authentication" replace />} />
-        <Route path="/bill-payments/book-flights" element={isAuthenticated ? <BookFlights /> : <Navigate to="/authentication" replace />} />
-        <Route path="/bill-payments/pay-electricity" element={isAuthenticated ? <PayElectricity /> : <Navigate to="/authentication" replace />} />
-        <Route path="/bill-payments/recharge-mobile" element={isAuthenticated ? <RechargeMobile /> : <Navigate to="/authentication" replace />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="*" element={isAuthenticated ? <PageNotFound /> : <Navigate to="/authentication" replace />} />
       </Routes>
     </Router>
   );
