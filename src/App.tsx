@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { MemoryRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Home from './components/Home';
 import ContactUs from './components/ContactUs';
 import EditProfile from './components/EditProfile';

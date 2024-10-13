@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 interface AuthenticationProps {
   onLogin: (username: string, password: string, rememberMe: boolean) => void;
@@ -70,13 +70,13 @@ const Authentication: React.FC<AuthenticationProps> = ({ onLogin }) => {
         Login
       </button>
       <div className="text-center">
-        <a href="/reset-password" className="text-blue-500 hover:underline">
+        <Link to="/reset-password" className="text-blue-500 hover:underline">
           Reset Password
-        </a>
+        </Link>
         <br />
-        <a href="/signup" className="text-blue-500 hover:underline">
+        <Link to="/signup" className="text-blue-500 hover:underline">
           Sign Up
-        </a>
+        </Link>
       </div>
     </div>
   );
