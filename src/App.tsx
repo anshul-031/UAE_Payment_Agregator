@@ -10,6 +10,8 @@ import MoneyTransfer from './components/MoneyTransfer';
 import BookFlights from './components/BookFlights';
 import PayElectricity from './components/PayElectricity';
 import RechargeMobile from './components/RechargeMobile';
+import ResetPassword from './components/ResetPassword';
+import Signup from './components/Signup';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -35,6 +37,8 @@ function App() {
         <Route path="/bill-payments/book-flights" element={<BookFlights />} />
         <Route path="/bill-payments/pay-electricity" element={<PayElectricity />} />
         <Route path="/bill-payments/recharge-mobile" element={<RechargeMobile />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </Router>
   );
